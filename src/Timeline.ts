@@ -1,26 +1,70 @@
 import { htmlToElement, elementInViewport } from './utils/helper.js';
 
 export default class Timeline {
+  container: null | HTMLElement = null;
+  events: [] | HTMLElement[] = [];
+  visibleEvents: [] | HTMLElement[] = [];
 
   constructor() {
     this.init();
   }
 
   init() {
-    window.addEventListener('scroll', this.checkVisibility);
+    this.container = document.querySelector('.mt-ts');
+
+    if (this.container) {
+      this.events = this.container.querySelectorAll('.mt-ts__event') as any as HTMLElement[];
+      window.addEventListener('scroll', () => this.checkVisibility());
+    }
+
     this.checkVisibility();
+  };
+
+  calculateTimelinePosition() {
+    if (this.container) {
+
+      this.visibleEvents = this.container.querySelectorAll('.mt-ts__event--visible') as any as HTMLElement[];
+
+      if (this.visibleEvents.length > 0) {
+        const elemRect = this.visibleEvents[this.visibleEvents.length - 1].getBoundingClientRect();
+        return window.innerHeight - elemRect.top;
+      }
+
+    }
+
+    return 0;
+  };
+
+  setTimelinePosition(yPosition: number) {
+    const timeLine = document.querySelector('.test') as HTMLElement;
+
+    if (timeLine)
+      timeLine.style.setProperty('--timeline-current-position-bottom', (yPosition - 70).toString() + "px");
   }
 
   checkVisibility() {
     const allEvents = document.querySelectorAll('.mt-ts__event');
+    let eventVisibilityHasChanged = false;
     allEvents.forEach((event) => {
       if (elementInViewport(event as HTMLElement)) {
-        console.log("viewport")
-        event.classList.add('mt-ts__event--visible');
+        if (!event.classList.contains('mt-ts__event--visible')) {
+          event.classList.add('mt-ts__event--visible');
+          eventVisibilityHasChanged = true;
+        }
       } else {
-        event.classList.remove('mt-ts__event--visible');
+        if (event.classList.contains('mt-ts__event--visible')) {
+          event.classList.remove('mt-ts__event--visible');
+          eventVisibilityHasChanged = true;
+        }
       }
 
     })
-  }
+
+    if (eventVisibilityHasChanged) {
+
+      this.setTimelinePosition(this.calculateTimelinePosition());
+    }
+
+  };
+
 }
