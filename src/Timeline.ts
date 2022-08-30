@@ -60,10 +60,10 @@ export default class Timeline {
 
     })
 
-    if (eventVisibilityHasChanged) {
+    //if (eventVisibilityHasChanged) {
 
-      this.setTimelinePosition(this.calculateTimelinePosition());
-    }
+    this.setTimelinePosition(this.calculateTimelinePosition());
+    //}
 
   };
 
