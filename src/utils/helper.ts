@@ -14,3 +14,26 @@ export const elementInViewport = (element: HTMLElement) => {
     return false;
   }
 }
+
+export const isElementPartiallyVisibly = (element: HTMLElement) => {
+  const bounding = element.getBoundingClientRect();
+  const elementHeight = element.offsetHeight;
+
+  if (bounding.top >= -elementHeight
+    && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + elementHeight) {
+
+    return true;
+  }
+
+  return false;
+}
+
+export const isElementOutOfViewport = (element: HTMLElement) => {
+  const bounding = element.getBoundingClientRect();
+
+  if (bounding.bottom + bounding.height < 0) {
+    return true;
+  }
+
+  return false;
+}

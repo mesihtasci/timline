@@ -1,4 +1,4 @@
-import { htmlToElement, elementInViewport } from './utils/helper.js';
+import { htmlToElement, elementInViewport, isElementOutOfViewport } from './utils/helper.js';
 
 export default class Timeline {
   container: null | HTMLElement = null;
@@ -26,8 +26,7 @@ export default class Timeline {
       this.visibleEvents = this.container.querySelectorAll('.mt-ts__event--visible') as any as HTMLElement[];
 
       if (this.visibleEvents.length > 0) {
-        const elemRect = this.visibleEvents[this.visibleEvents.length - 1].getBoundingClientRect();
-        return window.innerHeight - elemRect.top;
+        return this.visibleEvents[this.visibleEvents.length - 1].offsetTop;
       }
 
     }
@@ -36,10 +35,11 @@ export default class Timeline {
   };
 
   setTimelinePosition(yPosition: number) {
-    const timeLine = document.querySelector('.test') as HTMLElement;
+    console.log(yPosition)
+    const timeLine = document.querySelector('.mt-ts') as HTMLElement;
 
     if (timeLine)
-      timeLine.style.setProperty('--timeline-current-position-bottom', (yPosition - 70).toString() + "px");
+      timeLine.style.setProperty('--timeline-current-position-height', (yPosition).toString() + "px");
   }
 
   checkVisibility() {
