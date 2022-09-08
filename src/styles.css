@@ -1,10 +1,30 @@
+/* poppins-regular - latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('./fonts/poppins-v20-latin-regular.woff2') format('woff2'),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('./fonts/poppins-v20-latin-regular.woff') format('woff');
+  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
 body {
   padding: 0;
   margin: 0;
   box-sizing: content-box;
-  font-family: Helvetica, sans-serif;
   height: 100%;
   background-color: #1d1d1d;
+  font-family: 'Poppins';
 }
 
 .mt-ts__container {
@@ -18,22 +38,26 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(../examples/portrait.png);
+  /* background-image: url(../examples/portrait.png); */
   background-repeat: no-repeat;
   background-size: 100%;
+  /* background-color: blue; */
+  background: rgb(2, 0, 36);
+  position: relative;
+  background: rgb(76, 0, 255);
+    background: linear-gradient(130deg, rgba(76, 0, 255, 1) 0%, rgba(0, 255, 192, 1) 100%);
 }
 
 .mt-ts__content-wrapper {
-  width: calc(100% - 240px);
-  margin-top: 120px;
-  margin-bottom: 120px;
+  width: calc(100% - 420px);
+  margin-top: 210px;
+  margin-bottom: 210px;
+/* From https://css.glass */
+  background: rgba(255, 255, 255, 0.01);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 140px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(15.8px);
-  -webkit-backdrop-filter: blur(15.8px);
-  border: 1px solid rgba(255, 255, 255, 0.34);
+  backdrop-filter: blur(14.2px);
+  -webkit-backdrop-filter: blur(14.2px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,13 +76,19 @@ body {
   bottom: 20px;
   transform: translateX(-50%);
   width: 4px;
-  background-color: #fff;
-  border-color: red;
-  border: gray;
-  border-style: solid;
+  /* background-color: #fff; */
+  /* border-color: red; */
+  /* border: gray; */
+  /* border-style: solid; */
   border-radius: 20px;
 }
-
+#canvas {
+  cursor: crosshair;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .mt-ts__timeline-current-position::before {
   content: '';
   position: absolute;
@@ -94,14 +124,14 @@ body {
 
 
 .mt-ts__date {
-  font-size: 32px;
+  font-size: 46px;
   font-weight: bold;
 }
 
 .mt-ts__header {
-  font-size: 24px;
+  font-size: 46px;
 }
 
 .mt-ts__content {
-  font-size: 20px;
+  font-size: 24px;
 }
