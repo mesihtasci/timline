@@ -38,14 +38,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-image: url(../examples/portrait.png); */
   background-repeat: no-repeat;
-  background-size: 100%;
-  /* background-color: blue; */
-  background: rgb(2, 0, 36);
   position: relative;
-  background: rgb(76, 0, 255);
-    background: linear-gradient(130deg, rgba(76, 0, 255, 1) 0%, rgba(0, 255, 192, 1) 100%);
+  background-image: url(../examples/portrait.png),    linear-gradient(120deg, rgb(0 0 0) 0%, rgb(0 227 197) 100%);
+  background-attachment: fixed;
+  background-position-x: center;
 }
 
 .mt-ts__content-wrapper {
@@ -54,13 +51,18 @@ body {
   margin-bottom: 210px;
 /* From https://css.glass */
   background: rgba(255, 255, 255, 0.01);
-  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(14.2px);
-  -webkit-backdrop-filter: blur(14.2px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 40px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .mt-ts__event--visible {
@@ -106,7 +108,7 @@ body {
 .mt-ts__event {
   margin-top: 50px;
   margin-bottom: 50px;
-  color: black;
+  color: white;
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
