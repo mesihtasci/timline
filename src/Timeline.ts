@@ -2,6 +2,7 @@ import { htmlToElement, elementInViewport, isElementOutOfViewport } from './util
 
 export default class Timeline {
   container: null | HTMLElement = null;
+  contentWrapper: null | HTMLElement = null;
   events: [] | HTMLElement[] = [];
   visibleEvents: [] | HTMLElement[] = [];
 
@@ -10,11 +11,26 @@ export default class Timeline {
   }
 
   init() {
-    this.container = document.querySelector('.mt-ts');
+    this.container = document.querySelector('.mt-ts__container');
 
     if (this.container) {
+      this.contentWrapper = this.container!.querySelector('.mt-ts__content-wrapper')
+
       this.events = this.container.querySelectorAll('.mt-ts__event') as any as HTMLElement[];
-      window.addEventListener('scroll', () => this.checkVisibility());
+      window.addEventListener('scroll', (event) => {
+        this.checkVisibility();
+
+
+        if (this.contentWrapper) {
+          const scrollHeightPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
+          const translateY = (scrollHeightPercentage / 100) * document.documentElement.clientHeight
+
+          this.contentWrapper.style.transform = `translateY(-${translateY}px)`
+        }
+
+
+
+      });
     }
 
     this.checkVisibility();
@@ -35,7 +51,6 @@ export default class Timeline {
   };
 
   setTimelinePosition(yPosition: number) {
-    console.log(yPosition)
     const timeLine = document.querySelector('.mt-ts') as HTMLElement;
 
     if (timeLine)

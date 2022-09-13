@@ -9,14 +9,7 @@
     url('./fonts/poppins-v20-latin-regular.woff') format('woff');
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+
 
 body {
   padding: 0;
@@ -40,20 +33,18 @@ body {
   align-items: center;
   background-repeat: no-repeat;
   position: relative;
-  background-image: url(../examples/portrait.png),    linear-gradient(120deg, rgb(0 0 0) 0%, rgb(0 227 197) 100%);
+  background-image: url(../examples/portrait.png), url(../examples/portrait.png),
+    linear-gradient(120deg, rgb(0 255 184) 0%, rgb(233 143 255) 100%);
   background-attachment: fixed;
   background-position-x: center;
+  background-position-y: bottom;
+  background-size: contain;
 }
 
 .mt-ts__content-wrapper {
-  width: calc(100% - 420px);
-  margin-top: 210px;
-  margin-bottom: 210px;
-/* From https://css.glass */
-  background: rgba(255, 255, 255, 0.01);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  width: calc(100% - 20vw);
+  margin-top: 10vw;
+  margin-bottom: 10vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,6 +54,7 @@ body {
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 1400px;
 }
 
 .mt-ts__event--visible {
@@ -78,19 +70,9 @@ body {
   bottom: 20px;
   transform: translateX(-50%);
   width: 4px;
-  /* background-color: #fff; */
-  /* border-color: red; */
-  /* border: gray; */
-  /* border-style: solid; */
   border-radius: 20px;
 }
-#canvas {
-  cursor: crosshair;
-  z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+
 .mt-ts__timeline-current-position::before {
   content: '';
   position: absolute;
@@ -103,18 +85,17 @@ body {
   transition: all 2s;
 }
 
-
-
 .mt-ts__event {
-  margin-top: 50px;
-  margin-bottom: 50px;
   color: white;
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 48px;
-  max-width: 70%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  max-width: 85%;
 }
+
 
 .mt-ts__column-one {
   text-align: right;
@@ -137,3 +118,24 @@ body {
 .mt-ts__content {
   font-size: 24px;
 }
+
+@media (max-width: 1000px) {
+  .mt-ts__event {
+    grid-template-columns:  1fr;
+    grid-gap: 12px;
+    max-width: 90%;
+    word-break: break-word;
+  }
+
+  .mt-ts__column-one {
+    text-align: left;
+  }
+
+  .mt-ts__content-wrapper {
+    width: calc(100% - 10vw);
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+  }
+}
+
+/* backdrop-filter: saturate(180%) blur(40px); */
